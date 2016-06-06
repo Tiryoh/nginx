@@ -5,10 +5,15 @@
 #
 
 # Pull base image.
-FROM dockerfile/ubuntu
+FROM ubuntu:trusty
 
 # Install Nginx.
 RUN \
+  apt-get update -q && \
+  apt-get install -qy apt-file && \
+  apt-file update && \
+  apt-file search add-apt-repository && \
+  apt-get install -qy software-properties-common && \
   add-apt-repository -y ppa:nginx/stable && \
   apt-get update && \
   apt-get install -y nginx && \
